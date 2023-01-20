@@ -6,15 +6,20 @@ public class MainHangman
 {
     public static void main(String[] args)
     {
-        Scanner test = new Scanner(System.in);
-        System.out.print("Enter letter: ");
+        Random testRand = new Random();
+        String wordList[] = {"art", "scone", "beef", "bread", "home", "life"}; //List of words
+        int randomWord = testRand.nextInt(wordList.length); //randomly choose from list
 
-        String letter = test.nextLine(); //read user input
-        if(letter .equals(list))
-            System.out.println("Letter: " + letter); //Output user input
-        else{
-            System.out.println("That is not a valid letter.");
+        Scanner input = new Scanner(System.in);
+        for(int tries = 6; tries > 0; tries--) {
+            System.out.println("Tries left: " + tries); //Displays # of tries
+            System.out.print("Enter guess: ");
+            String guess = input.nextLine(); //read user input
+            if (guess.equals(wordList[randomWord]))
+                System.out.println("Correct! Your word was: " + guess); //Output user input
+            else {
+                System.out.println(guess + " is not a valid guess. Try again!");
+            }
         }
     }
-
 }
