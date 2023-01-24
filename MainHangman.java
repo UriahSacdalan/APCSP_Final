@@ -18,7 +18,7 @@ public class MainHangman
             if (guess.equals(wordList[randomWord]))
                 System.out.println("Correct! Your word was: " + guess); //Output user input
             else {
-                System.out.println(guess + " is not a valid guess. Try again!");
+                System.out.println(" That is not a valid guess. Try again!");
             }
         }
     }
