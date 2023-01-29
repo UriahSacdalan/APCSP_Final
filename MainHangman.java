@@ -26,14 +26,22 @@ public class MainHangman
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
-         String word = "hello";
-         char[] letters = word.toCharArray();
-         for(int wordIndex = 0; wordIndex < letters.length; wordIndex++){
-             String guess = input.nextLine(); //read user input
-             if (guess.equals(letters[0]))
-                System.out.println("Correct!");
-             else {
-                 System.out.println("That is not a valid guess. Try again!");
+        Random testRand = new Random();
+
+        String wordList[] = {"art", "scone", "beef", "bread", "home", "life"}; //List of words
+        int randomWord = testRand.nextInt(wordList.length); //randomly choose from list
+        char[] letters = wordList[randomWord].toCharArray(); //make letters individual characters(?)
+
+        //int guessLetters = letters.length; Tries? for loop ineffective... maybe?? I DONT KNOWWW
+
+        for(int tries = 6; tries > 0; tries--) {
+            System.out.println("Tries left: " + tries); //Displays # of tries
+            System.out.print("Enter guess: ");
+            String guess = input.nextLine(); //read user input
+            if (guess.equals(wordList[randomWord]))
+            System.out.println("Correct! Your word was: " + guess); //Output user input
+            else {
+                System.out.println("That is not a valid guess. Try again!");
              }
          }
     }
