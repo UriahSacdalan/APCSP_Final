@@ -35,7 +35,7 @@ public class MainHangman {
             int randomWord = testRand.nextInt(wordList.length); //randomly choose from list
             char[] letters = wordList[randomWord].toCharArray(); //make letters individual characters(?)
             int triesToGuess = letters.length; //# of Tries; for loop ineffective... maybe?? I DONT KNOWWW
-            char blank[] = new char [triesToGuess]; //used as a container for letters
+            char blank[] = new char[triesToGuess]; //used as a container for letters
 
             //loop will assign blanks corresponding to letters
             for (int blankLoop = 0; blankLoop < blank.length; blankLoop++) {
@@ -43,19 +43,28 @@ public class MainHangman {
             }
             boolean winner = false;
             int tries = 0;
-            while(!winner && tries != triesToGuess)
-                System.out.println("Letters left: " + blank); //Displays # of tries
+            while (!winner && tries != triesToGuess) {
+                System.out.print("Letters left: "); //Displays letters in word
+                System.out.println(blank);
+
+                int lives = triesToGuess-tries;
+                System.out.println("You have " + lives + " letters left. \n");
 
                 System.out.print("Enter one letter: ");
                 char guess = scanner.next().charAt(0); //read user input
-                if (guess == '_'){
-                   System.out.println("Input: " + guess);
+                if (guess == '_') {
+                    winner = true;
+                    gameStart = false;
+                }
+                else{
+                    System.out.println("Input: " + guess);
                 }
                 /*    System.out.println("Correct! Your word was: " + guess); //Output user input
                 else {
                     System.out.println("That is not a valid guess. Try again!");
                 }*/
 
+            }
         }
     }
 }
