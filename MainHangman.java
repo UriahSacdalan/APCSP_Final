@@ -3,25 +3,6 @@ import java.util.Random;
 /* Needs: selection (if), iteration (loop i.e. for), sequences (put it in order), user-defined methods that call other user-defined methods
 */
 public class MainHangman {
-    /*public static void main(String[] args)
-    {
-        Random testRand = new Random();
-        String wordList[] = {"art", "scone", "beef", "bread", "home", "life"}; //List of words
-        int randomWord = testRand.nextInt(wordList.length); //randomly choose from list
-
-        Scanner input = new Scanner(System.in);
-        for(int tries = 6; tries > 0; tries--) {
-            System.out.println("Tries left: " + tries); //Displays # of tries
-            System.out.print("Enter guess: ");
-            String guess = input.nextLine(); //read user input
-            if (guess.equals(wordList[randomWord]))
-                System.out.println("Correct! Your word was: " + guess); //Output user input
-            else {
-                System.out.println("That is not a valid guess. Try again!");
-            }
-        }
-    }*/
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random testRand = new Random();
@@ -45,26 +26,54 @@ public class MainHangman {
             int tries = 0;
             while (!winner && tries != triesToGuess) {
                 System.out.print("Letters left: "); //Displays letters in word
-                System.out.println(blank);
+                print(blank);
+                int lettersRemain = triesToGuess-tries;
 
-                int lives = triesToGuess-tries;
-                System.out.println("You have " + lives + " letters left. \n");
-
+                System.out.println("You have " + lettersRemain + " letters left. \n");
                 System.out.print("Enter one letter: ");
                 char guess = scanner.next().charAt(0); //read user input
+                int lives = 6;
                 if (guess == '_') {
                     winner = true;
                     gameStart = false;
                 }
                 else{
-                    System.out.println("Input: " + guess);
-                }
-                /*    System.out.println("Correct! Your word was: " + guess); //Output user input
-                else {
-                    System.out.println("That is not a valid guess. Try again!");
-                }*/
+                    for(int index = 0; index < letters.length; index++){
+                        if(letters[index] == guess){
+                            blank[index] = guess;
+                        }
+                    }
+                    if(didYouWin(blank)){
+                        winner = true;
 
+                        System.out.println("You got it!");}
+                }
+            }
+            if(!winner){
+                System.out.println("Sorry, you're out of tries!");
+            }
+            System.out.println("Want to try again? (Yes/No)");
+            String playAgain = scanner.nextLine();
+            if (playAgain.equals("No")){
+                gameStart = false;
             }
         }
+        System.out.println("Game Over!");
+    }
+    public static void print(char array[]){
+        for(int index = 0; index < array.length; index++){
+            System.out.print(array[index] + " ");
+        }
+        System.out.println();
+    }
+
+    public static boolean didYouWin(char array[]){
+        boolean win = true;
+        for(int index = 0; index < array.length; index++){
+            if(array[index] == '_'){
+                win = false;
+            }
+        }
+        return win;
     }
 }
