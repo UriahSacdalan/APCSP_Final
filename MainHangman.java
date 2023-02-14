@@ -5,7 +5,7 @@ import java.util.Random;
 public class MainHangman {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Random testRand = new Random();
+        Random random = new Random();
 
         String wordList[] = {"art", "scone", "beef", "bread", "home", "life"}; //List of words
 
@@ -13,7 +13,7 @@ public class MainHangman {
         boolean gameStart = true;
         while (gameStart) {
             System.out.println("Guess my word! \n");
-            int randomWord = testRand.nextInt(wordList.length); //randomly choose from list
+            int randomWord = random.nextInt(wordList.length); //randomly choose from list
             char[] letters = wordList[randomWord].toCharArray(); //make letters individual characters(?)
             int triesToGuess = letters.length; //# of Tries; for loop ineffective... maybe?? I DONT KNOWWW
             char blank[] = new char[triesToGuess]; //used as a container for letters
@@ -24,29 +24,29 @@ public class MainHangman {
             }
             boolean winner = false;
             int tries = 0;
-            while (!winner && tries != triesToGuess) {
-                System.out.print("Letters left: "); //Displays letters in word
+            while(!winner && tries != triesToGuess){
+                System.out.println("Letters left: "); //Displays letters in word
                 print(blank);
-                int lettersRemain = triesToGuess-tries;
+                System.out.printf("You have %d tries left. \n", triesToGuess-tries + 1);
+                System.out.println("Enter one letter: ");
 
-                System.out.println("You have " + lettersRemain + " letters left. \n");
-                System.out.print("Enter one letter: ");
-                char guess = scanner.next().charAt(0); //read user input
-                int lives = 6;
-                if (guess == '_') {
+                char guess = scanner.nextLine().charAt(0); //read user input
+                tries++;
+
+                if(guess == '-'){
                     winner = true;
                     gameStart = false;
-                }
-                else{
-                    for(int index = 0; index < letters.length; index++){
-                        if(letters[index] == guess){
-                            blank[index] = guess;
+                } else{
+                    for(int i=0; i<letters.length; i++){
+                        if(letters[i] == guess){
+                            blank[i] = guess;
                         }
                     }
+
                     if(didYouWin(blank)){
                         winner = true;
-
-                        System.out.println("You got it!");}
+                        System.out.println("You got it!");
+                    }
                 }
             }
             if(!winner){
