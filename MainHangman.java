@@ -16,26 +16,12 @@ public class MainHangman {
         winner = false;
     }
 
-    public static void playAgain(){
-        if(!winner){
-            System.out.println("Sorry, you're out of tries!");
-        }
-        System.out.println("Want to try again? (Yes/No)");
-        String playAgain = scanner.nextLine();
-        if (playAgain.equals("No")){
-            gameStart = false;
-        }
-        else if (playAgain.equals("Yes")){
-            gameStart = true;
-        }
-    }
-
     public static void main(String[] args){
         MainHangman hangman = new MainHangman();
 
         Random random = new Random();
 
-        String wordList[] = {"art", "scone", "beef", "bread", "home", "life"}; //List of words
+        String wordList[] = {"art", "scone", "beef", "bread", "head", "life"}; //List of words
 
         hangman.setTrue();
         while (gameStart) {
@@ -99,4 +85,25 @@ public class MainHangman {
         }
         return win;
     }
+    public static void playAgain(){
+        if(!winner){
+            System.out.println("Sorry, you're out of tries!");
+        }
+        System.out.println("Want to try again? (Yes/No)");
+        String playAgain = scanner.nextLine();
+        if (playAgain.equals("No")){
+            gameStart = false;
+        }
+        else if (playAgain.equals("no")){
+            gameStart = false;
+        }
+        else if (playAgain.equals("Yes")){
+            gameStart = true;
+        }
+        else if (playAgain.equals("yes")){
+
+            gameStart = true;
+        }
+    }
+
 }
