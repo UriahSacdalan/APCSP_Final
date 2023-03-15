@@ -1,5 +1,3 @@
-import com.sun.tools.javac.Main;
-
 import java.util.Scanner;
 import java.util.Random;
 /* Needs: selection (if), iteration (loop i.e. for), sequences (put it in order), user-defined methods that call other user-defined methods
@@ -15,11 +13,8 @@ public class MainHangman {
     public static int triesToGuess = letters.length;
     public static char blank[] = new char[triesToGuess];
     public static boolean winner;
+    public static char guess = scanner.nextLine().charAt(0); //read user input
 
-
-    public static void setTrue() {
-        gameStart = true;
-    }
 
     public static void setFalse() {
         winner = false;
@@ -31,8 +26,21 @@ public class MainHangman {
         }
         System.out.println();
     }
+    public static void start() {
+        System.out.println("Would you like to play? (Yes/No)");
+        String play = scanner.nextLine();
+        if (play.equals("No")) {
+            gameStart = false;
+        } else if (play.equals("no")) {
+            gameStart = false;
+        } else if (play.equals("Yes")) {
+            gameStart = true;
+        } else if (play.equals("yes")) {
+            gameStart = true;
+        }
+    }
 
-    public static void readInput() {
+    public static void readInput(char test) {
         char guess = scanner.nextLine().charAt(0); //read user input
         if (guess == '-') {
             winner = true;
@@ -80,8 +88,8 @@ public class MainHangman {
 
     public static void main(String[] args) {
         MainHangman hangman = new MainHangman();
+        hangman.start();
 
-        hangman.setTrue();
         while (gameStart) {
             System.out.println("Guess my word! \n");
 
@@ -100,7 +108,7 @@ public class MainHangman {
                 System.out.println("Enter one letter: ");
                 tries++;
 
-                hangman.readInput();
+                hangman.readInput(guess);
             }
             hangman.playAgain();
         }
